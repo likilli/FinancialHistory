@@ -4,23 +4,20 @@
 function FinancialHistory(balance) 
 {
   this.balance = balance
-
-  Object.defineProperties(this, "income",
-  {
-      set: function(income) 
-      {
-        this.balance = this.balance + this.income
-      }
-
-  })
-
-  Object.defineProperties(this, "spend",
-  {
-      set: function(spend) 
-      {
-        this.balance = this.balance - this.spend
-      }
-  })
+  // declare this.balance as getter only
+  // instead of regular property:
+  // Object.defineProperty(this, "balance", ....
 }
+
+FinancialHistory.prototype.income = function(income)
+{
+  this.balance += income
+}
+
+FinancialHistory.prototype.spend = function(spend)
+{
+  this.balance -= spend
+}
+
 var history = new FinancialHistory(500)
 
